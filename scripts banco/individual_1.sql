@@ -1,50 +1,343 @@
 /*
- Arquivo para ser usado depois que for inserido a carga de dados na tabela aux
+ Caso for trocar o nome do database por favor faca um um replace em todos ana_dwIndividual
+ que encontrar nesse arquivo e no outro
  */
-USE dados_enade;
+DROP DATABASE ana_dwIndividual;
+CREATE DATABASE IF NOT EXISTS ana_dwIndividual;
+
+USE ana_dwIndividual;
 
 /*
-Fazendo a inserção dos dados
+ Base de dados relacional
+ toda a estrutura usada
  */
 
--- INSERINDO OS DADOS NA TABELA DE REGIAO
-INSERT INTO dados_enade.TBRegiao (ID_Regiao, DS_Nome) VALUES (1, 'NORTE');
-INSERT INTO dados_enade.TBRegiao (ID_Regiao, DS_Nome) VALUES (2, 'NORDESTE');
-INSERT INTO dados_enade.TBRegiao (ID_Regiao, DS_Nome) VALUES (3, 'SUDESTE');
-INSERT INTO dados_enade.TBRegiao (ID_Regiao, DS_Nome) VALUES (4, 'SUL');
-INSERT INTO dados_enade.TBRegiao (ID_Regiao, DS_Nome) VALUES (5, 'CENTRO-OESTE');
+create table if not exists QuestionarioEstudante
+(
+	ID_QuestionarioEstudante int auto_increment,
+	QE_I01 varchar(1) null,
+	QE_I02 varchar(1) null,
+	QE_I03 varchar(1) null,
+	QE_I04 varchar(1) null,
+	QE_I05 varchar(1) null,
+	QE_I06 varchar(1) null,
+	QE_I07 varchar(1) null,
+	QE_I08 varchar(1) null,
+	QE_I09 varchar(1) null,
+	QE_I10 varchar(1) null,
+	QE_I11 varchar(1) null,
+	QE_I12 varchar(1) null,
+	QE_I13 varchar(1) null,
+	QE_I14 varchar(1) null,
+	QE_I15 varchar(1) null,
+	QE_I16 int null,
+	QE_I17 varchar(1) null,
+	QE_I18 varchar(1) null,
+	QE_I19 varchar(1) null,
+	QE_I20 varchar(1) null,
+	QE_I21 varchar(1) null,
+	QE_I22 varchar(1) null,
+	QE_I23 varchar(1) null,
+	QE_I24 varchar(1) null,
+	QE_I25 varchar(1) null,
+	QE_I26 varchar(1) null,
+	constraint ID_QuestionarioEstudante
+		unique (ID_QuestionarioEstudante)
+);
 
--- INSERINDO OS DADOS NA TABELA UF
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (11, 'Rondônia');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (12, 'Acre');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (13, 'Amazonas');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (14, 'Roraima');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (15, 'Pará');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (16, 'Amapa');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (17, 'Tocantins');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (21, 'Maranhão');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (22, 'Piauí');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (23, 'Ceará');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (24, 'Rio Grande do Norte');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (25, 'Paraíba');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (26, 'Pernambuco');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (27, 'Alagoas');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (28, 'Sergipe');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (29, 'Bahia');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (31, 'Minas gerais');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (32, 'Espírito santo');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (33, 'Rio de janeiro');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (35, 'São paulo');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (41, 'Paraná');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (42, 'Santa catarina');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (43, 'Rio grande do sul');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (50, 'Mato grosso do sul');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (51, 'Mato grosso');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (52, 'Goiás');
-INSERT INTO dados_enade.TBUF (ID_UF, DS_UF) VALUES (53, 'Distrito federal');
+alter table QuestionarioEstudante
+	add primary key (ID_QuestionarioEstudante);
 
--- Inserindo os dados na tabela municipio
-insert into dados_enade.TBMunicipio (Cod_Municipio, DS_Nome)
+create table if not exists QuestionarioProva
+(
+	ID_QuestionarioProva int auto_increment,
+	RS_I1 varchar(1) null,
+	RS_I2 varchar(1) null,
+	RS_I3 varchar(1) null,
+	RS_I4 varchar(1) null,
+	RS_I5 varchar(1) null,
+	RS_I6 varchar(1) null,
+	RS_I7 varchar(1) null,
+	RS_I8 varchar(1) null,
+	RS_I9 varchar(1) null,
+	constraint ID_QuestionarioProva
+		unique (ID_QuestionarioProva)
+);
+
+alter table QuestionarioProva
+	add primary key (ID_QuestionarioProva);
+
+create table if not exists TBEstudante
+(
+	ID_Estudante int auto_increment,
+	NR_Idade int null,
+	DS_Sexo varchar(100) null,
+	AnoConclusaoEnsinoMedio int null,
+	AnoInicioGraduacao int null,
+	DS_Turno varchar(100) null,
+	B_InscricaoAdm tinyint(1) null,
+	B_Concluinte tinyint(1) null,
+	constraint ID_Estudante
+		unique (ID_Estudante)
+);
+
+alter table TBEstudante
+	add primary key (ID_Estudante);
+
+DROP TRIGGER IF EXISTS TBEstudante_TR_ON_INSERT;
+
+create table if not exists TBGrauConcordanciaAluno
+(
+	ID_GrauConcordanciaAluno int auto_increment,
+	QE_I27 int null,
+	QE_I28 int null,
+	QE_I29 int null,
+	QE_I30 int null,
+	QE_I31 int null,
+	QE_I32 int null,
+	QE_I33 int null,
+	QE_I34 int null,
+	QE_I35 int null,
+	QE_I36 int null,
+	QE_I37 int null,
+	QE_I38 int null,
+	QE_I39 int null,
+	QE_I40 int null,
+	QE_I41 int null,
+	QE_I42 int null,
+	QE_I43 int null,
+	QE_I44 int null,
+	QE_I45 int null,
+	QE_I46 int null,
+	QE_I47 int null,
+	QE_I48 int null,
+	QE_I49 int null,
+	QE_I50 int null,
+	QE_I51 int null,
+	QE_I52 int null,
+	QE_I53 int null,
+	QE_I54 int null,
+	QE_I55 int null,
+	QE_I56 int null,
+	QE_I57 int null,
+	QE_I58 int null,
+	QE_I59 int null,
+	QE_I60 int null,
+	QE_I61 int null,
+	QE_I62 int null,
+	QE_I63 int null,
+	QE_I64 int null,
+	QE_I65 int null,
+	QE_I66 int null,
+	QE_I67 int null,
+	QE_I68 int null,
+	constraint ID_GrauConcordanciaAluno
+		unique (ID_GrauConcordanciaAluno)
+);
+
+alter table TBGrauConcordanciaAluno
+	add primary key (ID_GrauConcordanciaAluno);
+
+create table if not exists TBInstituicao
+(
+	Cod_Modalidade tinyint(1) null,
+	Cod_Curso int null,
+	Cod_AreaDoCurso int null,
+	Cod_OrganizacaoAcademica int null,
+	Cod_Categoria int null,
+	ID_Instituicao int auto_increment,
+	constraint ID_Instituicao
+		unique (ID_Instituicao),
+	constraint tudo_index
+		unique (Cod_Modalidade, Cod_AreaDoCurso, Cod_Categoria, Cod_OrganizacaoAcademica, Cod_Curso)
+);
+
+alter table TBInstituicao
+	add primary key (ID_Instituicao);
+
+create table if not exists TBMunicipio
+(
+	Cod_Municipio int not null,
+	DS_Nome varchar(200) null,
+	constraint Cod_Municipio
+		unique (Cod_Municipio)
+);
+
+alter table TBMunicipio
+	add primary key (Cod_Municipio);
+
+create table if not exists TBNota
+(
+	ID_Nota int auto_increment,
+	NR_BrutaProva decimal(13,2) null,
+	NR_BrutaGeral decimal(13,2) null,
+	NR_BrutaObjetivaGeral decimal(13,2) null,
+	NR_BrutaDiscursivaGeral decimal(13,2) null,
+	NR_Q1_Geral decimal(13,2) null,
+	NR_LP_Q1_DiscursivaGeral decimal(13,2) null,
+	NR_Conteudo_Q1_DiscursivaGeral decimal(13,2) null,
+	NR_Q2_Geral decimal(13,2) null,
+	NR_LP_Q2_DiscursivaGeral decimal(13,2) null,
+	NR_Conteudo_Q2_DiscursivaGeral decimal(13,2) null,
+	NR_BrutaComponenteEspecifico decimal(13,2) null,
+	NR_BrutaObjetivaEspecifico decimal(13,2) null,
+	NR_BrutaDiscursivaEspecifico decimal(13,2) null,
+	NR_Q1_DiscursivaEspecifico decimal(13,2) null,
+	NR_Q2_DiscursivaEspecifico decimal(13,2) null,
+	NR_Q3_DiscursivaEspecifico decimal(13,2) null,
+	constraint ID_Nota
+		unique (ID_Nota)
+);
+
+alter table TBNota
+	add primary key (ID_Nota);
+
+create table if not exists TBRegiao
+(
+	ID_Regiao int auto_increment,
+	DS_Nome varchar(200) null,
+	constraint ID_Regiao
+		unique (ID_Regiao)
+);
+
+alter table TBRegiao
+	add primary key (ID_Regiao);
+
+create table if not exists TBTipoPresenca
+(
+	ID_TipoPresenca int auto_increment,
+	Cod_Enade int null,
+	Cod_Prova int null,
+	Cod_ObjetivaGeral int null,
+	Cod_DiscursivaGeral int null,
+	Cod_ObjetivaEspecifico int null,
+	Cod_DiscursivaEspecifico int null,
+	constraint ID_TipoPresenca
+		unique (ID_TipoPresenca),
+	constraint tudo_index
+		unique (Cod_Enade, Cod_DiscursivaEspecifico, Cod_DiscursivaGeral, Cod_Prova, Cod_ObjetivaEspecifico, Cod_ObjetivaGeral)
+);
+
+alter table TBTipoPresenca
+	add primary key (ID_TipoPresenca);
+
+create table if not exists TBUF
+(
+	ID_UF int not null,
+	DS_UF varchar(50) null,
+	constraint ID_UF
+		unique (ID_UF)
+);
+
+alter table TBUF
+	add primary key (ID_UF);
+
+create table if not exists Dados
+(
+	ID_Dados int auto_increment,
+	NR_Ano int null,
+	FK_SQ_Instituicao int null,
+	FK_SQ_Municipio int null,
+	FK_SQ_UF int null,
+	FK_SQ_Regiao int null,
+	FK_SQ_TipoPresenca int null,
+	FK_SQ_Estudante int null,
+	FK_SQ_Nota int null,
+	FK_SQ_QuestionarioProva int null,
+	FK_SQ_QuestionarioEstudante int null,
+	FK_SQ_GrauConcordanciaAluno int null,
+	constraint ID_Dados
+		unique (ID_Dados),
+	constraint Dados_TBGrauConcordanciaAluno_ID_GrauConcordanciaAluno_fk
+		foreign key (FK_SQ_GrauConcordanciaAluno) references TBGrauConcordanciaAluno (ID_GrauConcordanciaAluno),
+	constraint Dados_TBInstituicao_ID_Instituicao_fk
+		foreign key (FK_SQ_Instituicao) references TBInstituicao (ID_Instituicao),
+	constraint Dados_TBUF_ID_UF_fk
+		foreign key (FK_SQ_UF) references TBUF (ID_UF),
+	constraint Dados_ibfk_1
+		foreign key (FK_SQ_Regiao) references TBRegiao (ID_Regiao),
+	constraint Dados_ibfk_3
+		foreign key (FK_SQ_TipoPresenca) references TBTipoPresenca (ID_TipoPresenca),
+	constraint Dados_ibfk_4
+		foreign key (FK_SQ_Estudante) references TBEstudante (ID_Estudante),
+	constraint Dados_ibfk_5
+		foreign key (FK_SQ_Nota) references TBNota (ID_Nota),
+	constraint Dados_ibfk_6
+		foreign key (FK_SQ_QuestionarioEstudante) references QuestionarioEstudante (ID_QuestionarioEstudante),
+	constraint Dados_ibfk_7
+		foreign key (FK_SQ_QuestionarioProva) references QuestionarioProva (ID_QuestionarioProva),
+	constraint Dados_ibfk_8
+		foreign key (FK_SQ_Municipio) references TBMunicipio (Cod_Municipio)
+);
+
+create index FK_SQ_Estudante
+	on Dados (FK_SQ_Estudante);
+
+create index FK_SQ_Municipio
+	on Dados (FK_SQ_Municipio);
+
+create index FK_SQ_Nota
+	on Dados (FK_SQ_Nota);
+
+create index FK_SQ_QuestionarioEstudante
+	on Dados (FK_SQ_QuestionarioEstudante);
+
+create index FK_SQ_QuestionarioProva
+	on Dados (FK_SQ_QuestionarioProva);
+
+create index FK_SQ_Regiao
+	on Dados (FK_SQ_Regiao);
+
+create index FK_SQ_TipoPresenca
+	on Dados (FK_SQ_TipoPresenca);
+
+alter table Dados
+	add primary key (ID_Dados);
+
+
+
+/*
+INSERINDO OS DADOS DEFAULT
+ */
+
+-- INSERINDO NA TABELA DE REGIAO
+INSERT INTO ana_dwIndividual.TBRegiao (ID_Regiao, DS_Nome) VALUES (1, 'NORTE');
+INSERT INTO ana_dwIndividual.TBRegiao (ID_Regiao, DS_Nome) VALUES (2, 'NORDESTE');
+INSERT INTO ana_dwIndividual.TBRegiao (ID_Regiao, DS_Nome) VALUES (3, 'SUDESTE');
+INSERT INTO ana_dwIndividual.TBRegiao (ID_Regiao, DS_Nome) VALUES (4, 'SUL');
+INSERT INTO ana_dwIndividual.TBRegiao (ID_Regiao, DS_Nome) VALUES (5, 'CENTRO-OESTE');
+
+-- INSERINDO NA TABELA UF
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (11, 'Rondônia');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (12, 'Acre');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (13, 'Amazonas');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (14, 'Roraima');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (15, 'Pará');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (16, 'Amapa');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (17, 'Tocantins');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (21, 'Maranhão');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (22, 'Piauí');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (23, 'Ceará');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (24, 'Rio Grande do Norte');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (25, 'Paraíba');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (26, 'Pernambuco');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (27, 'Alagoas');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (28, 'Sergipe');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (29, 'Bahia');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (31, 'Minas gerais');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (32, 'Espírito santo');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (33, 'Rio de janeiro');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (35, 'São paulo');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (41, 'Paraná');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (42, 'Santa catarina');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (43, 'Rio grande do sul');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (50, 'Mato grosso do sul');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (51, 'Mato grosso');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (52, 'Goiás');
+INSERT INTO ana_dwIndividual.TBUF (ID_UF, DS_UF) VALUES (53, 'Distrito federal');
+
+-- inserindo na tabela municipio
+insert into ana_dwIndividual.TBMunicipio (Cod_Municipio, DS_Nome)
 values  (1100015, ' ALTA FLORESTA D´OESTE'),
         (1100023, ' ARIQUEMES'),
         (1100031, ' CABIXI'),
@@ -5616,191 +5909,393 @@ values  (1100015, ' ALTA FLORESTA D´OESTE'),
         (5222302, ' VILA PROPICIO'),
         (5300108, ' BRASILIA');
 
-/*Fazendo o tratamento dos dados os dados vazio e nulos*/
+-- Criando a tabela auxiliar
 
-UPDATE enade_aux SET
- NU_ANO = IF(NU_ANO in ('','NA',' '),NULL,NU_ANO)
-,CO_IES = IF(CO_IES in ('','NA',' '),NULL,CO_IES)
-,CO_CATEGAD = IF(CO_CATEGAD in ('','NA',' '),NULL,CO_CATEGAD)
-,CO_ORGACAD = IF(CO_ORGACAD in ('','NA',' '),NULL,CO_ORGACAD)
-,CO_GRUPO = IF(CO_GRUPO in ('','NA',' '),NULL,CO_GRUPO)
-,CO_CURSO = IF(CO_CURSO in ('','NA',' '),NULL,CO_CURSO)
-,CO_MODALIDADE = IF(CO_MODALIDADE in ('','NA',' '),NULL,CO_MODALIDADE)
-,CO_MUNIC_CURSO = IF(CO_MUNIC_CURSO in ('','NA',' '),NULL,CO_MUNIC_CURSO)
-,CO_UF_CURSO = IF(CO_UF_CURSO in ('','NA',' '),NULL,CO_UF_CURSO)
-,CO_REGIAO_CURSO = IF(CO_REGIAO_CURSO in ('','NA',' '),NULL,CO_REGIAO_CURSO)
-,NU_IDADE = IF(NU_IDADE in ('','NA',' '),NULL,NU_IDADE)
-,TP_SEXO = IF(TP_SEXO in ('','NA',' '),NULL,TP_SEXO)
-,ANO_FIM_EM = IF(ANO_FIM_EM in ('','NA',' '),NULL,ANO_FIM_EM)
-,ANO_IN_GRAD = IF(ANO_IN_GRAD in ('','NA',' '),NULL,ANO_IN_GRAD)
-,CO_TURNO_GRADUACAO = IF(CO_TURNO_GRADUACAO in ('','NA',' '),NULL,CO_TURNO_GRADUACAO)
-,TP_INSCRICAO_ADM = IF(TP_INSCRICAO_ADM in ('','NA',' '),NULL,TP_INSCRICAO_ADM)
-,TP_INSCRICAO = IF(TP_INSCRICAO in ('','NA',' '),NULL,TP_INSCRICAO)
-,NU_ITEM_OFG = IF(NU_ITEM_OFG in ('','NA',' '),NULL,NU_ITEM_OFG)
-,NU_ITEM_OFG_Z = IF(NU_ITEM_OFG_Z in ('','NA',' '),NULL,NU_ITEM_OFG_Z)
-,NU_ITEM_OFG_X = IF(NU_ITEM_OFG_X in ('','NA',' '),NULL,NU_ITEM_OFG_X)
-,NU_ITEM_OFG_N = IF(NU_ITEM_OFG_N in ('','NA',' '),NULL,NU_ITEM_OFG_N)
-,NU_ITEM_OCE = IF(NU_ITEM_OCE in ('','NA',' '),NULL,NU_ITEM_OCE)
-,NU_ITEM_OCE_Z = IF(NU_ITEM_OCE_Z in ('','NA',' '),NULL,NU_ITEM_OCE_Z)
-,NU_ITEM_OCE_X = IF(NU_ITEM_OCE_X in ('','NA',' '),NULL,NU_ITEM_OCE_X)
-,NU_ITEM_OCE_N = IF(NU_ITEM_OCE_N in ('','NA',' '),NULL,NU_ITEM_OCE_N)
-,DS_VT_GAB_OFG_ORIG = IF(DS_VT_GAB_OFG_ORIG in ('','NA',' '),NULL,DS_VT_GAB_OFG_ORIG)
-,DS_VT_GAB_OFG_FIN = IF(DS_VT_GAB_OFG_FIN in ('','NA',' '),NULL,DS_VT_GAB_OFG_FIN)
-,DS_VT_GAB_OCE_ORIG = IF(DS_VT_GAB_OCE_ORIG in ('','NA',' '),NULL,DS_VT_GAB_OCE_ORIG)
-,DS_VT_GAB_OCE_FIN = IF(DS_VT_GAB_OCE_FIN in ('','NA',' '),NULL,DS_VT_GAB_OCE_FIN)
-,DS_VT_ESC_OCE = IF(DS_VT_ESC_OCE in ('','NA',' '),NULL,DS_VT_ESC_OCE)
-,DS_VT_ACE_OCE = IF(DS_VT_ACE_OCE in ('','NA',' '),NULL,DS_VT_ACE_OCE)
-,TP_PRES = IF(TP_PRES in ('','NA',' '),NULL,TP_PRES)
-,TP_PR_GER = IF(TP_PR_GER in ('','NA',' '),NULL,TP_PR_GER)
-,DS_VT_ESC_OFG = IF(DS_VT_ESC_OFG in ('','NA',' '),NULL,DS_VT_ESC_OFG)
-,DS_VT_ACE_OFG = IF(DS_VT_ACE_OFG in ('','NA',' '),NULL,DS_VT_ACE_OFG)
-,TP_PR_OB_FG = IF(TP_PR_OB_FG in ('','NA',' '),NULL,TP_PR_OB_FG)
-,TP_PR_DI_FG = IF(TP_PR_DI_FG in ('','NA',' '),NULL,TP_PR_DI_FG)
-,TP_PR_OB_CE = IF(TP_PR_OB_CE in ('','NA',' '),NULL,TP_PR_OB_CE)
-,TP_PR_DI_CE = IF(TP_PR_DI_CE in ('','NA',' '),NULL,TP_PR_DI_CE)
-,TP_SFG_D1 = IF(TP_SFG_D1 in ('','NA',' '),NULL,TP_SFG_D1)
-,TP_SFG_D2 = IF(TP_SFG_D2 in ('','NA',' '),NULL,TP_SFG_D2)
-,TP_SCE_D1 = IF(TP_SCE_D1 in ('','NA',' '),NULL,TP_SCE_D1)
-,TP_SCE_D2 = IF(TP_SCE_D2 in ('','NA',' '),NULL,TP_SCE_D2)
-,TP_SCE_D3 = IF(TP_SCE_D3 in ('','NA',' '),NULL,TP_SCE_D3)
-,NT_GER = IF(NT_GER in ('','NA',' '),NULL,NT_GER)
-,NT_FG = IF(NT_FG in ('','NA',' '),NULL,NT_FG)
-,NT_OBJ_FG = IF(NT_OBJ_FG in ('','NA',' '),NULL,NT_OBJ_FG)
-,NT_DIS_FG = IF(NT_DIS_FG in ('','NA',' '),NULL,NT_DIS_FG)
-,NT_FG_D1 = IF(NT_FG_D1 in ('','NA',' '),NULL,NT_FG_D1)
-,NT_FG_D1_PT = IF(NT_FG_D1_PT in ('','NA',' '),NULL,NT_FG_D1_PT)
-,NT_FG_D1_CT = IF(NT_FG_D1_CT in ('','NA',' '),NULL,NT_FG_D1_CT)
-,NT_FG_D2 = IF(NT_FG_D2 in ('','NA',' '),NULL,NT_FG_D2)
-,NT_FG_D2_PT = IF(NT_FG_D2_PT in ('','NA',' '),NULL,NT_FG_D2_PT)
-,NT_FG_D2_CT = IF(NT_FG_D2_CT in ('','NA',' '),NULL,NT_FG_D2_CT)
-,NT_CE = IF(NT_CE in ('','NA',' '),NULL,NT_CE)
-,NT_OBJ_CE = IF(NT_OBJ_CE in ('','NA',' '),NULL,NT_OBJ_CE)
-,NT_DIS_CE = IF(NT_DIS_CE in ('','NA',' '),NULL,NT_DIS_CE)
-,NT_CE_D1 = IF(NT_CE_D1 in ('','NA',' '),NULL,NT_CE_D1)
-,NT_CE_D2 = IF(NT_CE_D2 in ('','NA',' '),NULL,NT_CE_D2)
-,NT_CE_D3 = IF(NT_CE_D3 in ('','NA',' '),NULL,NT_CE_D3)
-,CO_RS_I1 = IF(CO_RS_I1 in ('','NA',' '),NULL,CO_RS_I1)
-,CO_RS_I2 = IF(CO_RS_I2 in ('','NA',' '),NULL,CO_RS_I2)
-,CO_RS_I3 = IF(CO_RS_I3 in ('','NA',' '),NULL,CO_RS_I3)
-,CO_RS_I4 = IF(CO_RS_I4 in ('','NA',' '),NULL,CO_RS_I4)
-,CO_RS_I5 = IF(CO_RS_I5 in ('','NA',' '),NULL,CO_RS_I5)
-,CO_RS_I6 = IF(CO_RS_I6 in ('','NA',' '),NULL,CO_RS_I6)
-,CO_RS_I7 = IF(CO_RS_I7 in ('','NA',' '),NULL,CO_RS_I7)
-,CO_RS_I8 = IF(CO_RS_I8 in ('','NA',' '),NULL,CO_RS_I8)
-,CO_RS_I9 = IF(CO_RS_I9 in ('','NA',' '),NULL,CO_RS_I9)
-,QE_I01 = IF(QE_I01 in ('','NA',' '),NULL,QE_I01)
-,QE_I02 = IF(QE_I02 in ('','NA',' '),NULL,QE_I02)
-,QE_I03 = IF(QE_I03 in ('','NA',' '),NULL,QE_I03)
-,QE_I04 = IF(QE_I04 in ('','NA',' '),NULL,QE_I04)
-,QE_I05 = IF(QE_I05 in ('','NA',' '),NULL,QE_I05)
-,QE_I06 = IF(QE_I06 in ('','NA',' '),NULL,QE_I06)
-,QE_I07 = IF(QE_I07 in ('','NA',' '),NULL,QE_I07)
-,QE_I08 = IF(QE_I08 in ('','NA',' '),NULL,QE_I08)
-,QE_I09 = IF(QE_I09 in ('','NA',' '),NULL,QE_I09)
-,QE_I10 = IF(QE_I10 in ('','NA',' '),NULL,QE_I10)
-,QE_I11 = IF(QE_I11 in ('','NA',' '),NULL,QE_I11)
-,QE_I12 = IF(QE_I12 in ('','NA',' '),NULL,QE_I12)
-,QE_I13 = IF(QE_I13 in ('','NA',' '),NULL,QE_I13)
-,QE_I14 = IF(QE_I14 in ('','NA',' '),NULL,QE_I14)
-,QE_I15 = IF(QE_I15 in ('','NA',' '),NULL,QE_I15)
-,QE_I16 = IF(QE_I16 in ('','NA',' '),NULL,QE_I16)
-,QE_I17 = IF(QE_I17 in ('','NA',' '),NULL,QE_I17)
-,QE_I18 = IF(QE_I18 in ('','NA',' '),NULL,QE_I18)
-,QE_I19 = IF(QE_I19 in ('','NA',' '),NULL,QE_I19)
-,QE_I20 = IF(QE_I20 in ('','NA',' '),NULL,QE_I20)
-,QE_I21 = IF(QE_I21 in ('','NA',' '),NULL,QE_I21)
-,QE_I22 = IF(QE_I22 in ('','NA',' '),NULL,QE_I22)
-,QE_I23 = IF(QE_I23 in ('','NA',' '),NULL,QE_I23)
-,QE_I24 = IF(QE_I24 in ('','NA',' '),NULL,QE_I24)
-,QE_I25 = IF(QE_I25 in ('','NA',' '),NULL,QE_I25)
-,QE_I26 = IF(QE_I26 in ('','NA',' '),NULL,QE_I26)
-,QE_I27 = IF(QE_I27 in ('','NA',' '),NULL,QE_I27)
-,QE_I28 = IF(QE_I28 in ('','NA',' '),NULL,QE_I28)
-,QE_I29 = IF(QE_I29 in ('','NA',' '),NULL,QE_I29)
-,QE_I30 = IF(QE_I30 in ('','NA',' '),NULL,QE_I30)
-,QE_I31 = IF(QE_I31 in ('','NA',' '),NULL,QE_I31)
-,QE_I32 = IF(QE_I32 in ('','NA',' '),NULL,QE_I32)
-,QE_I33 = IF(QE_I33 in ('','NA',' '),NULL,QE_I33)
-,QE_I34 = IF(QE_I34 in ('','NA',' '),NULL,QE_I34)
-,QE_I35 = IF(QE_I35 in ('','NA',' '),NULL,QE_I35)
-,QE_I36 = IF(QE_I36 in ('','NA',' '),NULL,QE_I36)
-,QE_I37 = IF(QE_I37 in ('','NA',' '),NULL,QE_I37)
-,QE_I38 = IF(QE_I38 in ('','NA',' '),NULL,QE_I38)
-,QE_I39 = IF(QE_I39 in ('','NA',' '),NULL,QE_I39)
-,QE_I40 = IF(QE_I40 in ('','NA',' '),NULL,QE_I40)
-,QE_I41 = IF(QE_I41 in ('','NA',' '),NULL,QE_I41)
-,QE_I42 = IF(QE_I42 in ('','NA',' '),NULL,QE_I42)
-,QE_I43 = IF(QE_I43 in ('','NA',' '),NULL,QE_I43)
-,QE_I44 = IF(QE_I44 in ('','NA',' '),NULL,QE_I44)
-,QE_I45 = IF(QE_I45 in ('','NA',' '),NULL,QE_I45)
-,QE_I46 = IF(QE_I46 in ('','NA',' '),NULL,QE_I46)
-,QE_I47 = IF(QE_I47 in ('','NA',' '),NULL,QE_I47)
-,QE_I48 = IF(QE_I48 in ('','NA',' '),NULL,QE_I48)
-,QE_I49 = IF(QE_I49 in ('','NA',' '),NULL,QE_I49)
-,QE_I50 = IF(QE_I50 in ('','NA',' '),NULL,QE_I50)
-,QE_I51 = IF(QE_I51 in ('','NA',' '),NULL,QE_I51)
-,QE_I52 = IF(QE_I52 in ('','NA',' '),NULL,QE_I52)
-,QE_I53 = IF(QE_I53 in ('','NA',' '),NULL,QE_I53)
-,QE_I54 = IF(QE_I54 in ('','NA',' '),NULL,QE_I54)
-,QE_I55 = IF(QE_I55 in ('','NA',' '),NULL,QE_I55)
-,QE_I56 = IF(QE_I56 in ('','NA',' '),NULL,QE_I56)
-,QE_I57 = IF(QE_I57 in ('','NA',' '),NULL,QE_I57)
-,QE_I58 = IF(QE_I58 in ('','NA',' '),NULL,QE_I58)
-,QE_I59 = IF(QE_I59 in ('','NA',' '),NULL,QE_I59)
-,QE_I60 = IF(QE_I60 in ('','NA',' '),NULL,QE_I60)
-,QE_I61 = IF(QE_I61 in ('','NA',' '),NULL,QE_I61)
-,QE_I62 = IF(QE_I62 in ('','NA',' '),NULL,QE_I62)
-,QE_I63 = IF(QE_I63 in ('','NA',' '),NULL,QE_I63)
-,QE_I64 = IF(QE_I64 in ('','NA',' '),NULL,QE_I64)
-,QE_I65 = IF(QE_I65 in ('','NA',' '),NULL,QE_I65)
-,QE_I66 = IF(QE_I66 in ('','NA',' '),NULL,QE_I66)
-,QE_I67 = IF(QE_I67 in ('','NA',' '),NULL,QE_I67)
-,QE_I68 = IF(QE_I68 in ('','NA',' '),NULL,QE_I68)
-,QE_I69 = IF(QE_I69 in ('','NA',' '),NULL,QE_I69)
-,QE_I70 = IF(QE_I70 in ('','NA',' '),NULL,QE_I70)
-,QE_I71 = IF(QE_I71 in ('','NA',' '),NULL,QE_I71)
-,QE_I72 = IF(QE_I72 in ('','NA',' '),NULL,QE_I72)
-,QE_I73 = IF(QE_I73 in ('','NA',' '),NULL,QE_I73)
-,QE_I74 = IF(QE_I74 in ('','NA',' '),NULL,QE_I74)
-,QE_I75 = IF(QE_I75 in ('','NA',' '),NULL,QE_I75)
-,QE_I76 = IF(QE_I76 in ('','NA',' '),NULL,QE_I76)
-,QE_I77 = IF(QE_I77 in ('','NA',' '),NULL,QE_I77)
-,QE_I78 = IF(QE_I78 in ('','NA',' '),NULL,QE_I78)
-,QE_I79 = IF(QE_I79 in ('','NA',' '),NULL,QE_I79)
-,QE_I80 = IF(QE_I80 in ('','NA',' '),NULL,QE_I80)
-,QE_I81 = IF(QE_I81 in ('','NA',' '),NULL,QE_I81);
+create table enade_aux
+(
+    NU_ANO             varchar(100) null,
+    CO_IES             varchar(100) null,
+    CO_CATEGAD         varchar(100) null,
+    CO_ORGACAD         varchar(100) null,
+    CO_GRUPO           varchar(100) null,
+    CO_CURSO           varchar(100) null,
+    CO_MODALIDADE      varchar(100) null,
+    CO_MUNIC_CURSO     varchar(100) null,
+    CO_UF_CURSO        varchar(100) null,
+    CO_REGIAO_CURSO    varchar(100) null,
+    NU_IDADE           varchar(100) null,
+    TP_SEXO            varchar(100) null,
+    ANO_FIM_EM         varchar(100) null,
+    ANO_IN_GRAD        varchar(100) null,
+    CO_TURNO_GRADUACAO varchar(100) null,
+    TP_INSCRICAO_ADM   varchar(100) null,
+    TP_INSCRICAO       varchar(100) null,
+    NU_ITEM_OFG        varchar(100) null,
+    NU_ITEM_OFG_Z      varchar(100) null,
+    NU_ITEM_OFG_X      varchar(100) null,
+    NU_ITEM_OFG_N      varchar(100) null,
+    NU_ITEM_OCE        varchar(100) null,
+    NU_ITEM_OCE_Z      varchar(100) null,
+    NU_ITEM_OCE_X      varchar(100) null,
+    NU_ITEM_OCE_N      varchar(100) null,
+    DS_VT_GAB_OFG_ORIG varchar(100) null,
+    DS_VT_GAB_OFG_FIN  varchar(100) null,
+    DS_VT_GAB_OCE_ORIG varchar(100) null,
+    DS_VT_GAB_OCE_FIN  varchar(100) null,
+    DS_VT_ESC_OFG      varchar(100) null,
+    DS_VT_ACE_OFG      varchar(100) null,
+    DS_VT_ESC_OCE      varchar(100) null,
+    DS_VT_ACE_OCE      varchar(100) null,
+    TP_PRES            varchar(100) null,
+    TP_PR_GER          varchar(100) null,
+    TP_PR_OB_FG        varchar(100) null,
+    TP_PR_DI_FG        varchar(100) null,
+    TP_PR_OB_CE        varchar(100) null,
+    TP_PR_DI_CE        varchar(100) null,
+    TP_SFG_D1          varchar(100) null,
+    TP_SFG_D2          varchar(100) null,
+    TP_SCE_D1          varchar(100) null,
+    TP_SCE_D2          varchar(100) null,
+    TP_SCE_D3          varchar(100) null,
+    NT_GER             varchar(100) null,
+    NT_FG              varchar(100) null,
+    NT_OBJ_FG          varchar(100) null,
+    NT_DIS_FG          varchar(100) null,
+    NT_FG_D1           varchar(100) null,
+    NT_FG_D1_PT        varchar(100) null,
+    NT_FG_D1_CT        varchar(100) null,
+    NT_FG_D2           varchar(100) null,
+    NT_FG_D2_PT        varchar(100) null,
+    NT_FG_D2_CT        varchar(100) null,
+    NT_CE              varchar(100) null,
+    NT_OBJ_CE          varchar(100) null,
+    NT_DIS_CE          varchar(100) null,
+    NT_CE_D1           varchar(100) null,
+    NT_CE_D2           varchar(100) null,
+    NT_CE_D3           varchar(100) null,
+    CO_RS_I1           varchar(100) null,
+    CO_RS_I2           varchar(100) null,
+    CO_RS_I3           varchar(100) null,
+    CO_RS_I4           varchar(100) null,
+    CO_RS_I5           varchar(100) null,
+    CO_RS_I6           varchar(100) null,
+    CO_RS_I7           varchar(100) null,
+    CO_RS_I8           varchar(100) null,
+    CO_RS_I9           varchar(100) null,
+    QE_I01             varchar(100) null,
+    QE_I02             varchar(100) null,
+    QE_I03             varchar(100) null,
+    QE_I04             varchar(100) null,
+    QE_I05             varchar(100) null,
+    QE_I06             varchar(100) null,
+    QE_I07             varchar(100) null,
+    QE_I08             varchar(100) null,
+    QE_I09             varchar(100) null,
+    QE_I10             varchar(100) null,
+    QE_I11             varchar(100) null,
+    QE_I12             varchar(100) null,
+    QE_I13             varchar(100) null,
+    QE_I14             varchar(100) null,
+    QE_I15             varchar(100) null,
+    QE_I16             varchar(100) null,
+    QE_I17             varchar(100) null,
+    QE_I18             varchar(100) null,
+    QE_I19             varchar(100) null,
+    QE_I20             varchar(100) null,
+    QE_I21             varchar(100) null,
+    QE_I22             varchar(100) null,
+    QE_I23             varchar(100) null,
+    QE_I24             varchar(100) null,
+    QE_I25             varchar(100) null,
+    QE_I26             varchar(100) null,
+    QE_I27             varchar(100) null,
+    QE_I28             varchar(100) null,
+    QE_I29             varchar(100) null,
+    QE_I30             varchar(100) null,
+    QE_I31             varchar(100) null,
+    QE_I32             varchar(100) null,
+    QE_I33             varchar(100) null,
+    QE_I34             varchar(100) null,
+    QE_I35             varchar(100) null,
+    QE_I36             varchar(100) null,
+    QE_I37             varchar(100) null,
+    QE_I38             varchar(100) null,
+    QE_I39             varchar(100) null,
+    QE_I40             varchar(100) null,
+    QE_I41             varchar(100) null,
+    QE_I42             varchar(100) null,
+    QE_I43             varchar(100) null,
+    QE_I44             varchar(100) null,
+    QE_I45             varchar(100) null,
+    QE_I46             varchar(100) null,
+    QE_I47             varchar(100) null,
+    QE_I48             varchar(100) null,
+    QE_I49             varchar(100) null,
+    QE_I50             varchar(100) null,
+    QE_I51             varchar(100) null,
+    QE_I52             varchar(100) null,
+    QE_I53             varchar(100) null,
+    QE_I54             varchar(100) null,
+    QE_I55             varchar(100) null,
+    QE_I56             varchar(100) null,
+    QE_I57             varchar(100) null,
+    QE_I58             varchar(100) null,
+    QE_I59             varchar(100) null,
+    QE_I60             varchar(100) null,
+    QE_I61             varchar(100) null,
+    QE_I62             varchar(100) null,
+    QE_I63             varchar(100) null,
+    QE_I64             varchar(100) null,
+    QE_I65             varchar(100) null,
+    QE_I66             varchar(100) null,
+    QE_I67             varchar(100) null,
+    QE_I68             varchar(100) null,
+    QE_I69             varchar(100) null,
+    QE_I70             varchar(100) null,
+    QE_I71             varchar(100) null,
+    QE_I72             varchar(100) null,
+    QE_I73             varchar(100) null,
+    QE_I74             varchar(100) null,
+    QE_I75             varchar(100) null,
+    QE_I76             varchar(100) null,
+    QE_I77             varchar(100) null,
+    QE_I78             varchar(100) null,
+    QE_I79             varchar(100) null,
+    QE_I80             varchar(100) null,
+    QE_I81             varchar(100) null
+);
+
+--  Criando a trigger para tratar os dados
+
+create trigger TBEstudante_TR_ON_INSERT
+	after insert
+	on TBEstudante
+	for each row
+	BEGIN
+
+    DECLARE IDSQNota INT;
+    DECLARE IDSQGrauConcordanciaAluno INT;
+    DECLARE IDSQQuestionarioEstudante INT;
+    DECLARE IDSQQuestionarioProva INT;
+    DECLARE IDSQInstituicao INT;
+    DECLARE IDSQTipoPresenca INT;
 
 
+    DECLARE ORGACAD INT;
+    DECLARE CATEGAD INT;
+    DECLARE GRUPO INT;
+    DECLARE CURSO INT;
+    DECLARE MODALIDADE INT;
+    DECLARE PRES INT;
+    DECLARE PR_GER INT;
+    DECLARE PR_OB_FG INT;
+    DECLARE PR_DI_FG INT;
+    DECLARE PR_OB_CE INT;
+    DECLARE PR_DI_CE INT;
 
-/*
- inserindo todas as instituicoes encontradas na base de dados
- */
-insert ignore into TBInstituicao (Cod_OrganizacaoAcademica, Cod_Categoria, Cod_AreaDoCurso, Cod_Curso, Cod_Modalidade)
-select CO_ORGACAD,CO_CATEGAD,CO_GRUPO,CO_CURSO,CO_MODALIDADE from enade_aux;
+
+    select
+         -- tb instituicao
+        CO_ORGACAD
+         ,CO_CATEGAD
+         ,CO_GRUPO
+         ,CO_CURSO
+         ,CO_MODALIDADE
+         -- tipo presenca
+         , TP_PRES
+         ,TP_PR_GER
+         ,TP_PR_OB_FG
+         ,TP_PR_DI_FG
+         ,TP_PR_OB_CE
+         ,TP_PR_DI_CE
+    INTO
+        ORGACAD
+        ,CATEGAD
+        ,GRUPO
+        ,CURSO
+        ,MODALIDADE
+        ,PRES
+        ,PR_GER
+        ,PR_OB_FG
+        ,PR_DI_FG
+        ,PR_OB_CE
+        ,PR_DI_CE
+    FROM enade_aux
+    WHERE id_aux = NEW.ID_Estudante;
+
+    SET IDSQInstituicao = (
+        SELECT ID_Instituicao
+        FROM TBInstituicao
+        WHERE Cod_OrganizacaoAcademica = ORGACAD
+            AND Cod_Categoria = CATEGAD
+            AND Cod_AreaDoCurso = GRUPO
+            AND Cod_Curso = CURSO
+            AND Cod_Modalidade = MODALIDADE
+        LIMIT 1 -- nao precisa
+    );
+
+    SET IDSQTipoPresenca = (
+            SELECT ID_TipoPresenca
+            FROM TBTipoPresenca
+            WHERE Cod_Enade = PRES
+                AND Cod_Prova = PR_GER
+                AND Cod_ObjetivaGeral = PR_OB_FG
+                AND Cod_DiscursivaGeral = PR_DI_FG
+                AND Cod_ObjetivaEspecifico = PR_OB_CE
+                AND Cod_DiscursivaEspecifico = PR_DI_CE
+            LIMIT 1 -- nao precisa
+        );
+
+    -- nao pode ser unico
+    INSERT INTO QuestionarioProva(RS_I1, RS_I2, RS_I3, RS_I4, RS_I5, RS_I6, RS_I7, RS_I8, RS_I9)
+    SELECT CO_RS_I1,CO_RS_I2,CO_RS_I3,CO_RS_I4,CO_RS_I5,CO_RS_I6,CO_RS_I7,CO_RS_I8,CO_RS_I9
+    from enade_aux WHERE id_aux = NEW.ID_Estudante;
+
+    SET IDSQQuestionarioProva = LAST_INSERT_ID();
+
+    -- Nao pode ser unico
+    INSERT INTO QuestionarioEstudante(QE_I01, QE_I02, QE_I03, QE_I04, QE_I05, QE_I06, QE_I07, QE_I08, QE_I09, QE_I10, QE_I11, QE_I12, QE_I13, QE_I14, QE_I15, QE_I16, QE_I17, QE_I18, QE_I19, QE_I20, QE_I21, QE_I22, QE_I23, QE_I24, QE_I25, QE_I26)
+    SELECT
+        QE_I01
+         , QE_I02
+         , QE_I03
+         , QE_I04
+         , QE_I05
+         , QE_I06
+         , QE_I07
+         , QE_I08
+         , QE_I09
+         , QE_I10
+         , QE_I11
+         , QE_I12
+         , QE_I13
+         , QE_I14
+         , QE_I15
+         , IF(QE_I16 = '', NULL,QE_I16)
+         , QE_I17
+         , QE_I18
+         , QE_I19
+         , QE_I20
+         , QE_I21
+         , QE_I22
+         , QE_I23
+         , QE_I24
+         , QE_I25
+         , QE_I26
+    from enade_aux WHERE id_aux = NEW.ID_Estudante;
+
+    SET IDSQQuestionarioEstudante = LAST_INSERT_ID();
+
+    -- nao pode ser unico
+    INSERT INTO TBGrauConcordanciaAluno(QE_I27, QE_I28, QE_I29, QE_I30, QE_I31, QE_I32, QE_I33, QE_I34, QE_I35, QE_I36, QE_I37, QE_I38, QE_I39, QE_I40, QE_I41, QE_I42, QE_I43, QE_I44, QE_I45, QE_I46, QE_I47, QE_I48, QE_I49, QE_I50, QE_I51, QE_I52, QE_I53, QE_I54, QE_I55, QE_I56, QE_I57, QE_I58, QE_I59, QE_I60, QE_I61, QE_I62, QE_I63, QE_I64, QE_I65, QE_I66, QE_I67, QE_I68)
+    SELECT if(QE_I27 = '',NULL,QE_I27)
+         , if(QE_I28 = '',NULL,QE_I28)
+         , if(QE_I29 = '',NULL,QE_I29)
+         , if(QE_I30 = '',NULL,QE_I30)
+         , if(QE_I31 = '',NULL,QE_I31)
+         , if(QE_I32 = '',NULL,QE_I32)
+         , if(QE_I33 = '',NULL,QE_I33)
+         , if(QE_I34 = '',NULL,QE_I34)
+         , if(QE_I35 = '',NULL,QE_I35)
+         , if(QE_I36 = '',NULL,QE_I36)
+         , if(QE_I37 = '',NULL,QE_I37)
+         , if(QE_I38 = '',NULL,QE_I38)
+         , if(QE_I39 = '',NULL,QE_I39)
+         , if(QE_I40 = '',NULL,QE_I40)
+         , if(QE_I41 = '',NULL,QE_I41)
+         , if(QE_I42 = '',NULL,QE_I42)
+         , if(QE_I43 = '',NULL,QE_I43)
+         , if(QE_I44 = '',NULL,QE_I44)
+         , if(QE_I45 = '',NULL,QE_I45)
+         , if(QE_I46 = '',NULL,QE_I46)
+         , if(QE_I47 = '',NULL,QE_I47)
+         , if(QE_I48 = '',NULL,QE_I48)
+         , if(QE_I49 = '',NULL,QE_I49)
+         , if(QE_I50 = '',NULL,QE_I50)
+         , if(QE_I51 = '',NULL,QE_I51)
+         , if(QE_I52 = '',NULL,QE_I52)
+         , if(QE_I53 = '',NULL,QE_I53)
+         , if(QE_I54 = '',NULL,QE_I54)
+         , if(QE_I55 = '',NULL,QE_I55)
+         , if(QE_I56 = '',NULL,QE_I56)
+         , if(QE_I57 = '',NULL,QE_I57)
+         , if(QE_I58 = '',NULL,QE_I58)
+         , if(QE_I59 = '',NULL,QE_I59)
+         , if(QE_I60 = '',NULL,QE_I60)
+         , if(QE_I61 = '',NULL,QE_I61)
+         , if(QE_I62 = '',NULL,QE_I62)
+         , if(QE_I63 = '',NULL,QE_I63)
+         , if(QE_I64 = '',NULL,QE_I64)
+         , if(QE_I65 = '',NULL,QE_I65)
+         , if(QE_I66 = '',NULL,QE_I66)
+         , if(QE_I67 = '',NULL,QE_I67)
+         , if(QE_I68 = '',NULL,QE_I68)
+    from enade_aux WHERE id_aux = NEW.ID_Estudante;
+
+    SET IDSQGrauConcordanciaAluno = LAST_INSERT_ID();
+
+    -- nao pode ser unico
+    insert into TBNota(
+          NR_BrutaProva
+        , NR_BrutaGeral
+        , NR_BrutaObjetivaGeral
+        , NR_BrutaDiscursivaGeral
+        , NR_Q1_Geral
+        , NR_LP_Q1_DiscursivaGeral
+        , NR_Conteudo_Q1_DiscursivaGeral
+        , NR_Q2_Geral
+        , NR_LP_Q2_DiscursivaGeral
+        , NR_Conteudo_Q2_DiscursivaGeral
+        , NR_BrutaComponenteEspecifico
+        , NR_BrutaObjetivaEspecifico
+        , NR_BrutaDiscursivaEspecifico
+        , NR_Q1_DiscursivaEspecifico
+        , NR_Q2_DiscursivaEspecifico
+        , NR_Q3_DiscursivaEspecifico)
+    SELECT IF(NT_GER = '',NULL, REPLACE(NT_GER,',','.')),
+           IF(NT_FG = '',NULL, REPLACE(NT_FG,',','.')),
+           IF(NT_OBJ_FG = '',NULL, REPLACE(NT_OBJ_FG,',','.')),
+           IF(NT_DIS_FG = '',NULL, REPLACE(NT_DIS_FG,',','.')),
+           IF(NT_FG_D1 = '',NULL, REPLACE(NT_FG_D1,',','.')),
+           IF(NT_FG_D1_PT = '',NULL, REPLACE(NT_FG_D1_PT,',','.')),
+           IF(NT_FG_D1_CT = '',NULL, REPLACE(NT_FG_D1_CT,',','.')),
+           IF(NT_FG_D2 = '',NULL, REPLACE(NT_FG_D2,',','.')),
+           IF(NT_FG_D2_PT = '',NULL, REPLACE(NT_FG_D2_PT,',','.')),
+           IF(NT_FG_D2_CT = '',NULL, REPLACE(NT_FG_D2_CT,',','.')),
+           IF(NT_CE = '',NULL, REPLACE(NT_CE,',','.')),
+           IF(NT_OBJ_CE = '',NULL, REPLACE(NT_OBJ_CE,',','.')),
+           IF(NT_DIS_CE = '',NULL, REPLACE(NT_DIS_CE,',','.')),
+           IF(NT_CE_D1 = '',NULL, REPLACE(NT_CE_D1,',','.')),
+           IF(NT_CE_D2 = '',NULL, REPLACE(NT_CE_D2,',','.')),
+           IF(NT_CE_D3 = '',NULL, REPLACE(NT_CE_D3,',','.'))
+    from enade_aux WHERE id_aux = NEW.ID_Estudante;
+
+    SET IDSQNota = LAST_INSERT_ID();
+
+    -- nao pode ser unico
+    insert into Dados(NR_Ano
+    , FK_SQ_Instituicao
+    , FK_SQ_Municipio
+    , FK_SQ_UF
+    , FK_SQ_Regiao
+    , FK_SQ_TipoPresenca
+    , FK_SQ_Estudante
+    , FK_SQ_Nota
+    , FK_SQ_QuestionarioProva
+    , FK_SQ_QuestionarioEstudante
+    , FK_SQ_GrauConcordanciaAluno)
+    SELECT NU_ANO
+         ,IDSQInstituicao
+         ,CO_MUNIC_CURSO
+         ,CO_UF_CURSO
+         ,CO_REGIAO_CURSO
+         ,IDSQTipoPresenca
+         ,NEW.ID_Estudante
+         ,IDSQNota
+         ,IDSQQuestionarioProva
+         ,IDSQQuestionarioEstudante
+         ,IDSQGrauConcordanciaAluno
+    from enade_aux WHERE id_aux = NEW.ID_Estudante;
 
 
-/*
- inserindo os tipos de presenca
- */
-insert ignore into TBTipoPresenca (
-                                   Cod_Enade
-                                    , Cod_Prova
-                                    , Cod_ObjetivaGeral
-                                    , Cod_DiscursivaGeral
-                                    , Cod_ObjetivaEspecifico
-                                    , Cod_DiscursivaEspecifico)
-SELECT TP_PRES
-     ,TP_PR_GER
-     ,TP_PR_OB_FG
-     ,TP_PR_DI_FG
-     ,TP_PR_OB_CE
-    ,TP_PR_DI_CE
-from enade_aux;
-
--- inserindo os dados na base relacional, com isso a TRIGGER vai preenchendo as outras dimensões
-insert into TBEstudante(NR_Idade, DS_Sexo, AnoConclusaoEnsinoMedio, AnoInicioGraduacao, DS_Turno, B_InscricaoAdm, B_Concluinte)
-SELECT NU_IDADE,TP_SEXO,ANO_FIM_EM,ANO_IN_GRAD,CO_TURNO_GRADUACAO,TP_INSCRICAO_ADM,TP_INSCRICAO from enade_aux;
-
- -- tirando as coisas que nao precisamos mais
-DROP TRIGGER IF EXISTS TBEstudante_TR_ON_INSERT;
-DROP TABLE dados_enade.enade_aux;
+    END;
